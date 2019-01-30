@@ -20,7 +20,9 @@ public interface HotelDao {
     @Query("DELETE FROM hotel")
     void deleteAll();
 
-    @Query("select min(hotel.price) + min(flight.price) from hotel inner join flight where hotel.id = :id")
+    @Query("select min(hotel.price) + min(flight.price) " +
+            "from hotel_flight inner join flight inner join hotel " +
+            "where hotel_flight.hotelId = hotel.id and hotel.id = :id and hotel_flight.flightId = flight.id")
     int getPrice(int id);
 
 }
