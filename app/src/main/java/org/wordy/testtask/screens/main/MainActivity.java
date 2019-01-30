@@ -1,9 +1,10 @@
-package org.wordy.testtask.screens;
+package org.wordy.testtask.screens.main;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import org.wordy.testtask.R;
@@ -13,9 +14,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     private ProgressBar progressBar;
-    private ListView airlineList;
-    private AirlinesAdapter airlinesAdapter;
-    private MainModel model;
+    private RecyclerView airlineList;
     private MainPresenter presenter;
 
     @Override
@@ -26,7 +25,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         airlineList = findViewById(R.id.list_airlines);
         progressBar = findViewById(R.id.progressBar);
 
-        model = new MainModel(getApplication());
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+        airlineList.setLayoutManager(llm);
+
+        MainModel model = new MainModel(getApplication());
         presenter = new MainPresenter(model, this);
 
         if (presenter.isOnline(this)) {
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     public void setAirlineItems(ArrayList<AirlineItem> airlineItems) {
-        airlinesAdapter = new AirlinesAdapter(this, airlineItems);
+        AirlinesRVAdapter airlinesAdapter = new AirlinesRVAdapter(airlineItems);
         airlineList.setAdapter(airlinesAdapter);
     }
 

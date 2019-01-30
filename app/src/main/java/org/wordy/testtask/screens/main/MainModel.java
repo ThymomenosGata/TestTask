@@ -1,4 +1,4 @@
-package org.wordy.testtask.screens;
+package org.wordy.testtask.screens.main;
 
 import android.app.Application;
 
@@ -109,7 +109,7 @@ public class MainModel implements MainContract.Model {
 
     @Override
     public boolean setAirlineItems() {
-        for(Hotels hotel : hotels) {
+        for (Hotels hotel : hotels) {
             airlineItems.add(new AirlineItem(hotel.getName(), mHotelFlightDao.getCountIds(hotel.getId()), mHotelDao.getPrice(hotel.getId())));
         }
         return true;

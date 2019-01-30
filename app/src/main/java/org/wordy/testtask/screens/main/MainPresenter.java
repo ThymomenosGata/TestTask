@@ -1,4 +1,4 @@
-package org.wordy.testtask.screens;
+package org.wordy.testtask.screens.main;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
