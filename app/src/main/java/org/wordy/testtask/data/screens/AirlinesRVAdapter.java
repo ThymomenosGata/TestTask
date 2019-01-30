@@ -1,4 +1,4 @@
-package org.wordy.testtask.screens.main;
+package org.wordy.testtask.data.screens;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -16,7 +16,7 @@ public class AirlinesRVAdapter extends RecyclerView.Adapter<AirlinesRVAdapter.Ai
 
     private List<AirlineItem> airlineItems;
 
-    public static class AirlinesHolder extends RecyclerView.ViewHolder {
+    public class AirlinesHolder extends RecyclerView.ViewHolder {
         CardView card;
         TextView name, count, price;
 
@@ -43,12 +43,12 @@ public class AirlinesRVAdapter extends RecyclerView.Adapter<AirlinesRVAdapter.Ai
     @Override
     public void onBindViewHolder(@NonNull AirlinesRVAdapter.AirlinesHolder airlinesHolder, int i) {
         airlinesHolder.name.setText(airlineItems.get(i).getName());
+        airlinesHolder.card.setTag(airlineItems.get(i).getHomeId());
         if (airlineItems.get(i).getCount() > 1) {
             airlinesHolder.price.setText("от " + Integer.toString(airlineItems.get(i).getPirce()) + " р");
         } else {
             airlinesHolder.price.setText(Integer.toString(airlineItems.get(i).getPirce()) + " р");
         }
-
         if (airlineItems.get(i).getCount() > 4 && airlineItems.get(i).getCount() < 21) {
             airlinesHolder.count.setText(Integer.toString(airlineItems.get(i).getCount()) + " вариантов перелета");
         } else if (airlineItems.get(i).getCount() > 1 && airlineItems.get(i).getCount() < 5) {
@@ -67,4 +67,5 @@ public class AirlinesRVAdapter extends RecyclerView.Adapter<AirlinesRVAdapter.Ai
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
+
 }

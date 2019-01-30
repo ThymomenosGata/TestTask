@@ -1,8 +1,12 @@
-package org.wordy.testtask.screens.main;
+package org.wordy.testtask.data.screens.main;
 
 import android.content.Context;
 
+import org.wordy.testtask.data.screens.AirlineItem;
+import org.wordy.testtask.data.screens.dialog.DialogItem;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public interface MainContract {
 
@@ -10,6 +14,8 @@ public interface MainContract {
         void setAirlineItems(ArrayList<AirlineItem> airlineItems);
 
         void showProgressBar(boolean isVisible);
+
+        void showMainDialog(List<DialogItem> dialogItems);
     }
 
     interface Presenter {
@@ -18,6 +24,8 @@ public interface MainContract {
         void getData();
 
         void deleteAllDatas();
+
+        void getItems(final int id);
 
     }
 
@@ -31,6 +39,8 @@ public interface MainContract {
         boolean setAirlineItems();
 
         boolean deleteAll();
+
+        boolean setDialogItem(int id);
     }
 
 }

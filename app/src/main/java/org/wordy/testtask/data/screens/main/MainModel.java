@@ -1,4 +1,4 @@
-package org.wordy.testtask.screens.main;
+package org.wordy.testtask.data.screens.main;
 
 import android.app.Application;
 
@@ -11,6 +11,8 @@ import org.wordy.testtask.data.dao.CompanyDao;
 import org.wordy.testtask.data.dao.FlightDao;
 import org.wordy.testtask.data.dao.HotelDao;
 import org.wordy.testtask.data.dao.HotelFlightDao;
+import org.wordy.testtask.data.screens.AirlineItem;
+import org.wordy.testtask.data.screens.dialog.DialogItem;
 import org.wordy.testtask.data.tables.Companies;
 import org.wordy.testtask.data.tables.Flights;
 import org.wordy.testtask.data.tables.HotelFlight;
@@ -25,6 +27,7 @@ public class MainModel implements MainContract.Model {
     private static ArrayList<Flights> flights = new ArrayList<>();
     private static ArrayList<Companies> companies = new ArrayList<>();
     private static ArrayList<AirlineItem> airlineItems = new ArrayList<>();
+    private static ArrayList<DialogItem> dialogItems = new ArrayList<>();
     private PortalRest mPortal;
     private HotelDao mHotelDao;
     private CompanyDao mCompanyDao;
@@ -54,6 +57,10 @@ public class MainModel implements MainContract.Model {
 
     public ArrayList<Companies> getCompanies() {
         return companies;
+    }
+
+    public ArrayList<DialogItem> getDialogItems() {
+        return dialogItems;
     }
 
     @Override
@@ -110,7 +117,11 @@ public class MainModel implements MainContract.Model {
     @Override
     public boolean setAirlineItems() {
         for (Hotels hotel : hotels) {
-            airlineItems.add(new AirlineItem(hotel.getName(), mHotelFlightDao.getCountIds(hotel.getId()), mHotelDao.getPrice(hotel.getId())));
+            airlineItems.add(new AirlineItem(
+                    hotel.getId(), hotel.getName(),
+                    mHotelFlightDao.getCountIds(hotel.getId()),
+                    mHotelDao.getPrice(hotel.getId())
+            ));
         }
         return true;
     }
@@ -121,6 +132,15 @@ public class MainModel implements MainContract.Model {
         mHotelDao.deleteAll();
         mFlightDao.deleteAll();
         mCompanyDao.deleteAll();
+        return true;
+    }
+
+    @Override
+    public boolean setDialogItem(int id) {
+        dialogItems.clear();
+        for(int i : mHotelFlightDao.getIds(id)) {
+            dialogItems.add(new DialogItem(mHotelDao.getName(id,i), mHotelDao.getAllPrice(id, i)));
+        }
         return true;
     }
 

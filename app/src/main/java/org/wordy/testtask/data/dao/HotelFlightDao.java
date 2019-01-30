@@ -23,4 +23,7 @@ public interface HotelFlightDao {
     @Query("select COUNT(flightId) from hotel_flight where hotelId = :id")
     int getCountIds(int id);
 
+    @Query("select flightId from hotel_flight where hotelId = :id")
+    int[] getIds(int id);
+
 }

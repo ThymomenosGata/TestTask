@@ -25,4 +25,14 @@ public interface HotelDao {
             "where hotel_flight.hotelId = hotel.id and hotel.id = :id and hotel_flight.flightId = flight.id")
     int getPrice(int id);
 
+    @Query("select hotel.price + flight.price " +
+            "from hotel_flight inner join flight inner join hotel inner join company " +
+            "where hotel_flight.hotelId = hotel.id and hotel.id = :id and hotel_flight.flightId = flight.id and flight.id = :flId")
+    int getAllPrice(int id, int flId);
+
+    @Query("select company.name " +
+            "from hotel_flight inner join flight inner join hotel inner join company " +
+            "where hotel_flight.hotelId = hotel.id and hotel.id = :id and hotel_flight.flightId = flight.id and flight.id = :flId")
+    String getName(int id, int flId);
+
 }

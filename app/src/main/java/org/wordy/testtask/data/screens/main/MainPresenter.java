@@ -1,4 +1,4 @@
-package org.wordy.testtask.screens.main;
+package org.wordy.testtask.data.screens.main;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -43,6 +43,24 @@ public class MainPresenter implements MainContract.Presenter {
                 } else {
 
                 }
+            }
+        }.execute();
+    }
+
+    @Override
+    @SuppressLint("StaticFieldLeak")
+    public void getItems(final int id) {
+        new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                return mModel.setDialogItem(id);
+            }
+
+            @Override
+            protected void onPostExecute(Boolean aBoolean) {
+                super.onPostExecute(aBoolean);
+                mView.showMainDialog(mModel.getDialogItems());
+
             }
         }.execute();
     }
