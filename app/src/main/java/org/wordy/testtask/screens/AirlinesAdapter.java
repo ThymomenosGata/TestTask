@@ -17,7 +17,7 @@ public class AirlinesAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private ArrayList<AirlineItem> objects;
 
-    public AirlinesAdapter(Context ctx, LayoutInflater inflater, ArrayList<AirlineItem> objects) {
+    public AirlinesAdapter(Context ctx, ArrayList<AirlineItem> objects) {
         this.ctx = ctx;
         this.objects = objects;
         this.inflater = (LayoutInflater) ctx

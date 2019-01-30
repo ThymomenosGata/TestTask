@@ -8,15 +8,18 @@ import android.content.Context;
 import org.wordy.testtask.data.dao.CompanyDao;
 import org.wordy.testtask.data.dao.FlightDao;
 import org.wordy.testtask.data.dao.HotelDao;
+import org.wordy.testtask.data.dao.HotelFlightDao;
 import org.wordy.testtask.data.tables.Companies;
 import org.wordy.testtask.data.tables.Flights;
+import org.wordy.testtask.data.tables.HotelFlight;
 import org.wordy.testtask.data.tables.Hotels;
 
 @Database(
         entities = {
                 Hotels.class,
                 Companies.class,
-                Flights.class
+                Flights.class,
+                HotelFlight.class
         }, version = 1, exportSchema = false)
 public abstract class DataBase extends RoomDatabase {
 
@@ -27,6 +30,8 @@ public abstract class DataBase extends RoomDatabase {
     public abstract HotelDao hotelDao();
 
     public abstract CompanyDao companyDao();
+
+    public abstract HotelFlightDao hotelFlightDao();
 
 
     public static DataBase getDatabase(final Context context) {

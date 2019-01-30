@@ -54,7 +54,7 @@ public class Flights {
         this.price = price;
     }
 
-    public Flights fromJson(JSONObject jsonObject) throws JSONException {
+    public static Flights fromJson(JSONObject jsonObject) throws JSONException {
         Flights flights = new Flights();
         flights.id = jsonObject.getInt("id");
         flights.companyId = jsonObject.getInt("companyId");

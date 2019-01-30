@@ -13,7 +13,6 @@ public class Hotels {
 
     @PrimaryKey
     private int id;
-    private ArrayList<Integer> flights = new ArrayList<>();
     private String name;
     private int price;
 
@@ -26,14 +25,6 @@ public class Hotels {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public ArrayList<Integer> getFlights() {
-        return flights;
-    }
-
-    public void setFlights(ArrayList<Integer> flights) {
-        this.flights = flights;
     }
 
     public String getName() {
@@ -52,12 +43,9 @@ public class Hotels {
         this.price = price;
     }
 
-    public Hotels fromJson(JSONObject jsonObject) throws JSONException {
+    public static Hotels fromJson(JSONObject jsonObject) throws JSONException {
         Hotels hotels = new Hotels();
         hotels.id = jsonObject.getInt("id");
-        for (int i = 0; i < jsonObject.getJSONArray("flights").length(); i++) {
-            hotels.flights.add(jsonObject.getJSONArray("flights").getInt(i));
-        }
         hotels.name = jsonObject.getString("name");
         hotels.price = jsonObject.getInt("price");
         return hotels;

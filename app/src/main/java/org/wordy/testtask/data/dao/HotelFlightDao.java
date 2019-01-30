@@ -6,21 +6,21 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import org.wordy.testtask.data.tables.Hotels;
+import org.wordy.testtask.data.tables.HotelFlight;
 
 @Dao
-public interface HotelDao {
+public interface HotelFlightDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Hotels hotels);
+    void insert(HotelFlight hotelFlight);
 
     @Update
-    void update(Hotels hotels);
+    void update(HotelFlight hotelFlight);
 
-    @Query("DELETE FROM hotel")
+    @Query("DELETE FROM hotel_flight")
     void deleteAll();
 
-    @Query("select min(hotel.price) + min(flight.price) from hotel inner join flight where hotel.id = :id")
-    int getPrice(int id);
+    @Query("select COUNT(flightId) from hotel_flight where hotelId = :id")
+    int getCountIds(int id);
 
 }

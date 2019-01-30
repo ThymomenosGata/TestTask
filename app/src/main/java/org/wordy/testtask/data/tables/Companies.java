@@ -31,7 +31,7 @@ public class Companies {
         this.name = name;
     }
 
-    public Companies fromJson(JSONObject jsonObject) throws JSONException {
+    public static Companies fromJson(JSONObject jsonObject) throws JSONException {
         Companies companies = new Companies();
         companies.id = jsonObject.getInt("id");
         companies.name = jsonObject.getString("name");
