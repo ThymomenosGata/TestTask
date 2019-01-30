@@ -1,4 +1,4 @@
-package org.wordy.testtask;
+package org.wordy.testtask.screens;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import org.wordy.testtask.R;
 
 import java.util.ArrayList;
 

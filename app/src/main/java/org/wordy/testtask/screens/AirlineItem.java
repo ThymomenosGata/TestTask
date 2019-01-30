@@ -1,4 +1,4 @@
-package org.wordy.testtask;
+package org.wordy.testtask.screens;
 
 public class AirlineItem {
 
