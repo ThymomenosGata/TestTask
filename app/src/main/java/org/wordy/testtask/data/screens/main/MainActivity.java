@@ -2,6 +2,7 @@ package org.wordy.testtask.data.screens.main;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,11 +12,16 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.wordy.testtask.R;
+import org.wordy.testtask.data.data.OnCompleteListener;
+import org.wordy.testtask.data.data.Result;
 import org.wordy.testtask.data.screens.AirlineItem;
 import org.wordy.testtask.data.screens.AirlinesRVAdapter;
 import org.wordy.testtask.data.screens.dialog.DialogItem;
+import org.wordy.testtask.data.screens.dialog.MainDialog;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
@@ -23,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private ProgressBar progressBar;
     private RecyclerView airlineList;
     private MainPresenter presenter;
+    private MainDialog mainDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +88,27 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     @Override
-    public void showMainDialog(List<DialogItem> dialogItems, int position) {
-        Toast.makeText(getApplicationContext(), "this is " + dialogItems.get(0).getPrice(), Toast.LENGTH_LONG).show();
+    public void showMainDialog(final List<DialogItem> dialogItems, int position) {
+
+        Collections.sort(dialogItems, new Comparator<DialogItem>() {
+            @Override
+            public int compare(DialogItem o1, DialogItem o2) {
+                return Integer.compare(o1.getPrice(), o2.getPrice());
+            }
+        });
+
+        mainDialog = MainDialog.newInstance(dialogItems, position, new OnCompleteListener() {
+            @Override
+            public void onComplete(Result result) {
+                Toast.makeText(getApplicationContext(), "this is " + result.getObject(), Toast.LENGTH_LONG).show();
+                presenter.updatePosition((Integer) result.getObject(), dialogItems.get(0).getId());
+            }
+        });
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (dialogItems.size() != 0) {
+            mainDialog.show(fragmentManager, "dialog");
+        }
     }
 
 

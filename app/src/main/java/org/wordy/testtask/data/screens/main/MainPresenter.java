@@ -68,6 +68,19 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     @SuppressLint("StaticFieldLeak")
+    public void updatePosition(final int position, final int hotelId) {
+        new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                mModel.updateHotel(position, hotelId);
+                return null;
+            }
+        }.execute();
+    }
+
+    @Override
+    @SuppressLint("StaticFieldLeak")
     public void deleteAllDatas() {
 
         new AsyncTask<Void, Void, Boolean>() {

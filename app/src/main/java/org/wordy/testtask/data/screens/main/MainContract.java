@@ -25,7 +25,9 @@ public interface MainContract {
 
         void deleteAllDatas();
 
-        void getItems(final int id);
+        void getItems(int id);
+
+        void updatePosition(int position, int hotelId);
 
     }
 
@@ -42,7 +44,7 @@ public interface MainContract {
 
         boolean setDialogItem(int id);
 
-        boolean updateHotel(int position);
+        boolean updateHotel(int position, int id);
 
         int getAirline(int id);
     }

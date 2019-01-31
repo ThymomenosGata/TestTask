@@ -39,7 +39,7 @@ public interface HotelDao {
     @Query("select position from hotel where id = :id")
     int getPosition(int id);
 
-    @Query("update hotel set position = :position")
-    void updatePosition(int position);
+    @Query("update hotel set position = :position where id = :id")
+    void updatePosition(int position, int id);
 
 }

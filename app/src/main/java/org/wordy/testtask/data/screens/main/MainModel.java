@@ -123,14 +123,14 @@ public class MainModel implements MainContract.Model {
     public boolean setDialogItem(int id) {
         dialogItems.clear();
         for (int i : mHotelFlightDao.getIds(id)) {
-            dialogItems.add(new DialogItem(mHotelDao.getName(id, i), mHotelDao.getAllPrice(id, i)));
+            dialogItems.add(new DialogItem(id, mHotelDao.getName(id, i), mHotelDao.getAllPrice(id, i)));
         }
         return true;
     }
 
     @Override
-    public boolean updateHotel(int position) {
-        mHotelDao.updatePosition(position);
+    public boolean updateHotel(int position, int id) {
+        mHotelDao.updatePosition(position, id);
         return true;
     }
 
