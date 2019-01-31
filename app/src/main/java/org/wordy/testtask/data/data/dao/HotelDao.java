@@ -36,4 +36,10 @@ public interface HotelDao {
             "and hotel_flight.flightId = flight.id and flight.id = :flId and flight.companyId = company.id")
     String getName(int id, int flId);
 
+    @Query("select position from hotel where id = :id")
+    int getPosition(int id);
+
+    @Query("update hotel set position = :position")
+    void updatePosition(int position);
+
 }

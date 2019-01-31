@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     @Override
-    public void showMainDialog(List<DialogItem> dialogItems) {
+    public void showMainDialog(List<DialogItem> dialogItems, int position) {
         Toast.makeText(getApplicationContext(), "this is " + dialogItems.get(0).getPrice(), Toast.LENGTH_LONG).show();
     }
 

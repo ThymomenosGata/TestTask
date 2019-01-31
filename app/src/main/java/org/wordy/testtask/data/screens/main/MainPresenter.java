@@ -50,16 +50,17 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     @SuppressLint("StaticFieldLeak")
     public void getItems(final int id) {
-        new AsyncTask<Void, Void, Boolean>() {
+        new AsyncTask<Void, Void, Integer>() {
             @Override
-            protected Boolean doInBackground(Void... voids) {
-                return mModel.setDialogItem(id);
+            protected Integer doInBackground(Void... voids) {
+                mModel.setDialogItem(id);
+                return mModel.getAirline(id);
             }
 
             @Override
-            protected void onPostExecute(Boolean aBoolean) {
-                super.onPostExecute(aBoolean);
-                mView.showMainDialog(mModel.getDialogItems());
+            protected void onPostExecute(Integer mInteger) {
+                super.onPostExecute(mInteger);
+                mView.showMainDialog(mModel.getDialogItems(), mInteger);
 
             }
         }.execute();

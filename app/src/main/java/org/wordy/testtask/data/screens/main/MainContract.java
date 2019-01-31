@@ -15,7 +15,7 @@ public interface MainContract {
 
         void showProgressBar(boolean isVisible);
 
-        void showMainDialog(List<DialogItem> dialogItems);
+        void showMainDialog(List<DialogItem> dialogItems, int position);
     }
 
     interface Presenter {
@@ -41,6 +41,10 @@ public interface MainContract {
         boolean deleteAll();
 
         boolean setDialogItem(int id);
+
+        boolean updateHotel(int position);
+
+        int getAirline(int id);
     }
 
 }

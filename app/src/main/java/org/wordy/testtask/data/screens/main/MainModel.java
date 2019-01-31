@@ -11,12 +11,12 @@ import org.wordy.testtask.data.data.dao.CompanyDao;
 import org.wordy.testtask.data.data.dao.FlightDao;
 import org.wordy.testtask.data.data.dao.HotelDao;
 import org.wordy.testtask.data.data.dao.HotelFlightDao;
-import org.wordy.testtask.data.screens.AirlineItem;
-import org.wordy.testtask.data.screens.dialog.DialogItem;
 import org.wordy.testtask.data.data.tables.Companies;
 import org.wordy.testtask.data.data.tables.Flights;
 import org.wordy.testtask.data.data.tables.HotelFlight;
 import org.wordy.testtask.data.data.tables.Hotels;
+import org.wordy.testtask.data.screens.AirlineItem;
+import org.wordy.testtask.data.screens.dialog.DialogItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,8 +24,6 @@ import java.util.ArrayList;
 public class MainModel implements MainContract.Model {
 
     private static ArrayList<Hotels> hotels = new ArrayList<>();
-    private static ArrayList<Flights> flights = new ArrayList<>();
-    private static ArrayList<Companies> companies = new ArrayList<>();
     private static ArrayList<AirlineItem> airlineItems = new ArrayList<>();
     private static ArrayList<DialogItem> dialogItems = new ArrayList<>();
     private PortalRest mPortal;
@@ -43,20 +41,8 @@ public class MainModel implements MainContract.Model {
         this.mHotelFlightDao = dataBase.hotelFlightDao();
     }
 
-    public ArrayList<Flights> getFlights() {
-        return flights;
-    }
-
     public ArrayList<AirlineItem> getAirlineItems() {
         return airlineItems;
-    }
-
-    public ArrayList<Hotels> getHotels() {
-        return hotels;
-    }
-
-    public ArrayList<Companies> getCompanies() {
-        return companies;
     }
 
     public ArrayList<DialogItem> getDialogItems() {
@@ -90,7 +76,6 @@ public class MainModel implements MainContract.Model {
             for (int i = 0; i < jsonArrayOfFlights.length(); i++) {
                 JSONObject json = jsonArrayOfFlights.getJSONObject(i);
                 mFlightDao.insert(Flights.fromJson(json));
-                flights.add(Flights.fromJson(json));
             }
             return true;
         } catch (JSONException | IOException e) {
@@ -106,7 +91,6 @@ public class MainModel implements MainContract.Model {
             for (int i = 0; i < jsonArrayOfCompanies.length(); i++) {
                 JSONObject json = jsonArrayOfCompanies.getJSONObject(i);
                 mCompanyDao.insert(Companies.fromJson(json));
-                companies.add(Companies.fromJson(json));
             }
             return true;
         } catch (JSONException | IOException e) {
@@ -138,10 +122,21 @@ public class MainModel implements MainContract.Model {
     @Override
     public boolean setDialogItem(int id) {
         dialogItems.clear();
-        for(int i : mHotelFlightDao.getIds(id)) {
-            dialogItems.add(new DialogItem(mHotelDao.getName(id,i), mHotelDao.getAllPrice(id, i)));
+        for (int i : mHotelFlightDao.getIds(id)) {
+            dialogItems.add(new DialogItem(mHotelDao.getName(id, i), mHotelDao.getAllPrice(id, i)));
         }
         return true;
+    }
+
+    @Override
+    public boolean updateHotel(int position) {
+        mHotelDao.updatePosition(position);
+        return true;
+    }
+
+    @Override
+    public int getAirline(int id) {
+        return mHotelDao.getPosition(id);
     }
 
 }
