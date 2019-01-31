@@ -1,4 +1,4 @@
-package org.wordy.testtask.data.dao;
+package org.wordy.testtask.data.data.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
@@ -6,7 +6,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import org.wordy.testtask.data.tables.Hotels;
+import org.wordy.testtask.data.data.tables.Hotels;
 
 @Dao
 public interface HotelDao {

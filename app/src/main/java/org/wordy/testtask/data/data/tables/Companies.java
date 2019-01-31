@@ -1,4 +1,4 @@
-package org.wordy.testtask.data.tables;
+package org.wordy.testtask.data.data.tables;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

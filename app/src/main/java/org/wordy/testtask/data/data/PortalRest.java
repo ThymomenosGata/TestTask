@@ -1,4 +1,4 @@
-package org.wordy.testtask.data;
+package org.wordy.testtask.data.data;
 
 import java.io.IOException;
 

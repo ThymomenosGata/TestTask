@@ -1,12 +1,10 @@
-package org.wordy.testtask.data.tables;
+package org.wordy.testtask.data.data.tables;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 @Entity(tableName = "hotel")
 public class Hotels {
@@ -15,6 +13,7 @@ public class Hotels {
     private int id;
     private String name;
     private int price;
+    private int position;
 
     public Hotels() {
     }
@@ -43,11 +42,20 @@ public class Hotels {
         this.price = price;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     public static Hotels fromJson(JSONObject jsonObject) throws JSONException {
         Hotels hotels = new Hotels();
         hotels.id = jsonObject.getInt("id");
         hotels.name = jsonObject.getString("name");
         hotels.price = jsonObject.getInt("price");
+        hotels.position = 0;
         return hotels;
     }
 

@@ -1,4 +1,4 @@
-package org.wordy.testtask.data.dao;
+package org.wordy.testtask.data.data.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
@@ -6,17 +6,18 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import org.wordy.testtask.data.tables.Companies;
+import org.wordy.testtask.data.data.tables.Flights;
 
 @Dao
-public interface CompanyDao {
+public interface FlightDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Companies companies);
+    void insert(Flights flights);
 
     @Update
-    void update(Companies companies);
+    void update(Flights flights);
 
-    @Query("DELETE FROM company")
+    @Query("DELETE FROM flight")
     void deleteAll();
 
 }
