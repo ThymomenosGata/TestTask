@@ -42,7 +42,7 @@ public class AirlinesRVAdapter extends RecyclerView.Adapter<AirlinesRVAdapter.Ai
 
     @Override
     public void onBindViewHolder(@NonNull AirlinesRVAdapter.AirlinesHolder airlinesHolder, int i) {
-        airlinesHolder.name.setText(airlineItems.get(i).getName());
+        airlinesHolder.name.setText("Отель \"" + airlineItems.get(i).getName() + "\"");
         airlinesHolder.card.setTag(airlineItems.get(i).getHomeId());
         if (airlineItems.get(i).getCount() > 1) {
             airlinesHolder.price.setText("от " + Integer.toString(airlineItems.get(i).getPirce()) + " р");
